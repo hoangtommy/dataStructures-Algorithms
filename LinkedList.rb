@@ -47,8 +47,6 @@ class LinkedList
 
   def at(index)
   	puts 'error, list does not have that index' if self.size < index
-  	# create a counter to iterate through the nodes values
-  	# return the value at the index
   	current_node = @head
   	node_number = 0
   	until node_number >= index
@@ -56,8 +54,23 @@ class LinkedList
   	  node_number += 1
   	  current_node = current_node.next_node 
   	end
-  	current_node.value
+  	return current_node.value
   end
+
+  def pop
+  	@tail.value = nil
+  end
+
+  def contains?(value)
+  	current_node = @head
+  	until current_node.nil?
+  	  return true if current_node.value === value
+  	  current_node = current_node.next_node
+  	end
+  	return false
+  end
+
+  
 
 end
 
@@ -65,5 +78,4 @@ l = LinkedList.new('First')
 l.append('second')
 l.append('third')
 l.prepend('zero')
-p l.at(1)
-
+p l.contains?('third')
