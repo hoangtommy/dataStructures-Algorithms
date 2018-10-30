@@ -58,7 +58,19 @@ class LinkedList
   end
 
   def pop
-  	@tail.value = nil
+  	# find the last node in the list
+  	# reassign that node's value to nil
+  	previous_node = @head
+  	current_node = @head
+  	until current_node.value.nil?
+  	  if current_node.next_node.nil?
+  	  	previous_node.next_node = nil
+  	  	current_node.value = nil
+  	  	return
+  	  end
+  	  previous_node = current_node
+  	  current_node = current_node.next_node
+  	end
   end
 
   def contains?(value)
@@ -83,9 +95,7 @@ class LinkedList
 
   def to_s
   	current_node = @head
-  	# create a string that we'll display
   	string = ''
-  	# iterate through the node list and add the values to the stirng, include -> and stuff
     until current_node.nil?
       string += " (#{current_node.value}) ->"
       current_node = current_node.next_node
@@ -98,4 +108,5 @@ l = LinkedList.new('First')
 l.append('second')
 l.append('third')
 l.prepend('zero')
+l.pop
 p l.to_s
