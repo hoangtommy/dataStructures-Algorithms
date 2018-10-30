@@ -70,12 +70,32 @@ class LinkedList
   	return false
   end
 
-  
+  def find(data)
+  	current_node = @head
+  	index = 0
+  	until current_node.nil?
+  	  return index if current_node.value === data
+  	  index += 1
+  	  current_node = current_node.next_node
+  	end
+  	return nil
+  end
 
+  def to_s
+  	current_node = @head
+  	# create a string that we'll display
+  	string = ''
+  	# iterate through the node list and add the values to the stirng, include -> and stuff
+    until current_node.nil?
+      string += " (#{current_node.value}) ->"
+      current_node = current_node.next_node
+    end
+  	puts string += ' nil'
+  end
 end
 
 l = LinkedList.new('First')
 l.append('second')
 l.append('third')
 l.prepend('zero')
-p l.contains?('third')
+p l.to_s
